@@ -1,5 +1,6 @@
 import { getActiveTabURL } from "./utils.js";
 
+// adding a new bookmark row to the popup
 const addNewBookmark = (bookmarks, bookmark) => {
   const bookmarkTitleElement = document.createElement("div");
   const controlsElement = document.createElement("div");
@@ -74,14 +75,16 @@ const setBookmarkAttributes =  (src, eventListener, controlParentElement) => {
 document.addEventListener("DOMContentLoaded", async () => {
   const activeTab = await getActiveTabURL();
   const queryParameters = activeTab.url.split("?")[1];
+  //get the unique identifier for each video
   const urlParameters = new URLSearchParams(queryParameters);
-
+  //gets the url value
   const currentVideo = urlParameters.get("v");
 
   if (activeTab.url.includes("youtube.com/watch") && currentVideo) {
     chrome.storage.sync.get([currentVideo], (data) => {
       const currentVideoBookmarks = data[currentVideo] ? JSON.parse(data[currentVideo]) : [];
 
+      //viewBookmarks
       viewBookmarks(currentVideoBookmarks);
     });
   } else {
