@@ -11,6 +11,7 @@
       });
     });
   };
+  
 
   //adding the bookmark to our extension
   const addNewBookmarkEventHandler = async () => {
